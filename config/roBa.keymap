@@ -19,7 +19,6 @@
     //         <&kp LEFT_ARROW>,
     //         <&kp UP_ARROW>,
     //         <&kp DOWN_ARROW>;
-
     //     tick = <10>;
     //     wait-ms = <5>;
     //     tap-ms = <5>;
@@ -74,6 +73,36 @@
             #binding-cells = <2>;
             tapping-term-ms = <200>;
         };
+
+        td_hyphen: td_hyphen {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TD_HYPHEN";
+            #binding-cells = <0>;
+            bindings = <&kp MINUS>, <&kp UNDERSCORE>;
+        };
+
+        mm_tilda: mm_tilda {
+            compatible = "zmk,behavior-mod-morph";
+            label = "MM_TILDA";
+            bindings = <&td_hyphen>, <&kp TILDE>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_LSFT)>;
+        };
+
+        td_ques: td_ques {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TD_QUES";
+            #binding-cells = <0>;
+            bindings = <&kp QUESTION>, <&kp EXCLAMATION>;
+        };
+
+        td_ctrl_z: td_ctrl_z {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TD_CTRL_Z";
+            #binding-cells = <0>;
+            bindings = <&none>, <&kp LC(Z)>;
+        };
     };
 
     keymap {
@@ -81,13 +110,13 @@
 
         default_layer {
             bindings = <
-&kp Q             &kp W         &kp E         &kp R                        &kp T                                                          &kp Y        &kp U  &lt 5 I    &kp O    &kp P
-&kp A             &kp S         &kp D         &kp F                        &kp G        &kp LS(LG(S))                      &kp MINUS      &kp H        &kp J  &kp K      &kp L    &kp SQT
-&mt LEFT_SHIFT Z  &kp X         &kp C         &kp V                        &kp B        &kp COLON                          &kp SEMICOLON  &kp N        &kp M  &kp COMMA  &kp DOT  &kp SLASH
-&kp LCTRL         &kp LEFT_WIN  &kp LEFT_ALT  &lt_to_layer_0 6 INT_HENKAN  &lt 2 SPACE  &lt_to_layer_0 3 INT_MUHENKAN      &kp BACKSPACE  &lt 1 ENTER                             &kp DEL
+&kp Q      &kp W            &kp E         &kp R      &kp T                                                   &kp Y          &kp U  &kp I      &kp O    &kp P
+&kp A      &kp S            &kp D         &kp F      &kp G      &none                      &kp INT_HENKAN    &kp H          &kp J  &kp K      &kp L    &mm_tilda
+&kp Z      &kp X            &kp C         &kp V      &kp B      &mt LEFT_WIN LS(CAPS)      &kp INT_MUHENKAN  &kp N          &kp M  &kp COMMA  &kp DOT  &td_ques
+&kp LCTRL  &mt LCTRL LC(Y)  &kp LEFT_ALT  &lt 3 TAB  &lt 2 ESC  &lt 1 SPACE                &kp ENTER         &kp BACKSPACE                             &kp DEL
             >;
 
-            sensor-bindings = <&inc_dec_kp PG_UP PAGE_DOWN>;
+            sensor-bindings = <&inc_dec_kp K_SCROLL_UP K_SCROLL_DOWN>;
         };
 
         FUNCTION {
