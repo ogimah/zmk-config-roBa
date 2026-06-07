@@ -62,6 +62,20 @@
             bindings = <&to 0 &macro_param_1to1 &kp MACRO_PLACEHOLDER>;
             label = "TO_LAYER_0";
         };
+
+        mc_ctrl_ctrl: mc_ctrl_ctrl {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LCTRL &kp LCTRL>;
+            label = "MC_CTRL_CTRL";
+        };
+
+        mc_past: mc_past {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LEFT_ALT &kp H &kp V &kp T>;
+            label = "MC_PAST";
+        };
     };
 
     behaviors {
@@ -112,6 +126,43 @@
             #binding-cells = <2>;
             tapping-term-ms = <200>;
         };
+
+        td_find: td_find {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TD_FIND";
+            #binding-cells = <0>;
+            bindings = <&kp LC(F)>, <&kp LC(H)>;
+        };
+
+        td_ctrl_p: td_ctrl_p {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TD_CTRL_P";
+            #binding-cells = <0>;
+            bindings = <&kp LC(P)>, <&kp LC(LS(SEMICOLON))>;
+        };
+
+        td_ctrl_v: td_ctrl_v {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TD_CTRL_V";
+            #binding-cells = <0>;
+            bindings = <&kp LC(V)>, <&kp LC(LS(V))>;
+        };
+
+        hl_past: hl_past {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HL_PAST";
+            bindings = <&mc_past>, <&td_ctrl_v>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+        };
+
+        td_ctrl_shift_n: td_ctrl_shift_n {
+            compatible = "zmk,behavior-tap-dance";
+            label = "TD_CTRL_SHIFT_N";
+            #binding-cells = <0>;
+            bindings = <&kp LC(LS(N))>, <&kp LC(RS(PLUS))>;
+        };
     };
 
     keymap {
@@ -130,11 +181,13 @@
 
         FUNCTION {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                       &kp F1  &kp F2  &kp F3  &kp F4  &kp F5
-&trans  &trans  &trans  &trans  &trans  &trans      &kp F13  &kp F6  &kp F7  &kp F8  &kp F9  &kp F10
-&trans  &trans  &trans  &trans  &trans  &trans      &trans   &trans  &trans  &trans  &trans  &kp F11
-&trans  &trans  &trans  &trans  &trans  &trans      &trans   &trans                          &kp F12
+&kp F1     &kp F2          &msc MOVE_X(10)   &kp F3           &kp F5                               &kp F6           &kp F7            &mkp MB4  &kp F9    &kp F10
+&td_find   &msc SCRL_LEFT  &msc MOVE_X(-10)  &msc SCRL_RIGHT  &td_ctrl_p       &trans      &trans  &kp LA(LC(TAB))  &mkp MB1          &mkp MB3  &mkp MB2  &mc_ctrl_ctrl
+&kp LG(V)  &kp LC(X)       &kp LC(C)         &hl_past 0 0     &kp LC(KP_PLUS)  &trans      &trans  &kp LC(PLUS)     &td_ctrl_shift_n  &none     &none     &none
+&trans     &trans          &trans            &trans           &trans           &trans      &trans  &trans                                                 &trans
             >;
+
+            sensor-bindings = <&inc_dec_kp K_SCROLL_UP K_SCROLL_DOWN>;
         };
 
         NUM {
