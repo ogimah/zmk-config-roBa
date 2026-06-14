@@ -180,7 +180,7 @@
             compatible = "zmk,behavior-tap-dance";
             label = "TD_CTRL_P";
             #binding-cells = <0>;
-            bindings = <&kp LC(P)>, <&kp LC(LS(SEMICOLON))>;
+            bindings = <&kp LC(P)>, <&kp LC(SEMICOLON)>;
         };
 
         td_ctrl_v: td_ctrl_v {
@@ -385,10 +385,10 @@
 
         default_layer {
             bindings = <
-&kp Q              &kp W            &kp E         &kp R      &kp T                                                     &kp Y          &kp U  &kp I      &kp O    &kp P
-&kp A              &kp S            &kp D         &kp F      &kp G      &none                      &kp INT_HENKAN      &kp H          &kp J  &kp K      &kp L    &mm_tilda
-&kp Z              &kp X            &kp C         &kp V      &kp B      &mt LEFT_WIN LS(CAPS)      &lt 6 INT_MUHENKAN  &kp N          &kp M  &kp COMMA  &kp DOT  &td_ques
-&hl_shift LCTRL 0  &mt LCTRL LC(Y)  &kp LEFT_ALT  &lt 3 TAB  &lt 2 ESC  &lt 1 SPACE                &kp ENTER           &kp BACKSPACE                             &kp DEL
+&kp Q                   &kp W            &kp E         &kp R      &kp T                                                     &kp Y          &kp U  &kp I      &kp O    &kp P
+&kp A                   &kp S            &kp D         &kp F      &kp G      &none                      &kp INT_HENKAN      &kp H          &kp J  &kp K      &kp L    &mm_tilda
+&kp Z                   &kp X            &kp C         &kp V      &kp B      &mt LEFT_WIN LS(CAPS)      &lt 6 INT_MUHENKAN  &kp N          &kp M  &kp COMMA  &kp DOT  &td_ques
+&hl_shift LEFT_SHIFT 0  &mt LCTRL LC(Y)  &kp LEFT_ALT  &lt 3 TAB  &lt 2 ESC  &lt 1 SPACE                &kp ENTER           &kp BACKSPACE                             &kp DEL
             >;
 
             sensor-bindings = <&inc_dec_kp K_SCROLL_UP K_SCROLL_DOWN>;
